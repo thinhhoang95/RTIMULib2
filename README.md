@@ -1,3 +1,14 @@
+# RTEMISLib - an IMU interfacing library for Raspberry Pi, Arduino data acquisition with additional calibration parameters suitable for navigation purposes
+
+RTEMISLib is based off RTIMULib2, but additional calibration on the accelerometer and gyroscope such as converting non-orthogonal to orthogonal IMU frame, placing additional bias on the accelerometer to prevent accumulation of residual gravity which could advertently affect the dead-reckoning performance.
+
+More documentation coming soon!
+
+RTIMULib2 is licensed to its original authors (richards-tech and more, see below).
+RTEMISLib addon is created by Hoang Dinh Thinh (Ho Chi Minh City University of Technology, Vietnam) under GPLv3 license.
+Contact e-mail: thinh at neuralmetrics dot net.
+
+
 # RTIMULib2 - a versatile C++ and Python 9-dof, 10-dof and 11-dof IMU library
 
 RTIMULib2 is an easy way to connect a 9-dof, 10-dof or 11-dof IMU to an embedded Linux system and obtain RTQF or Kalman-filtered quaternion or Euler angle pose data. Basically, two simple function calls (IMUInit() and IMURead()) are pretty much all that's needed to integrate RTIMULib2.
