@@ -150,6 +150,26 @@
 #define RTIMULIB_GYRO_BIAS_Y                "GyroBiasY"
 #define RTIMULIB_GYRO_BIAS_Z                "GyroBiasZ"
 
+//  Define additional bias and deskewing keys
+#define PANACEA_ACCEL_SKEW_YZ               "PanaceaAccelSkewX"
+#define PANACEA_ACCEL_SKEW_ZY               "PanaceaAccelSkewY"
+#define PANACEA_ACCEL_SKEW_ZX               "PanaceaAccelSkewZ"
+#define PANACEA_ACCEL_SCALE_X               "PanaceaAccelScaleX"
+#define PANACEA_ACCEL_SCALE_Y               "PanaceaAccelScaleY"
+#define PANACEA_ACCEL_SCALE_Z               "PanaceaAccelScaleZ"
+#define PANACEA_ACCEL_BIAS_X                "PanaceaAccelBiasX"
+#define PANACEA_ACCEL_BIAS_Y                "PanaceaAccelBiasY"
+#define PANACEA_ACCEL_BIAS_Z                "PanaceaAccelBiasZ"
+#define PANACEA_GYRO_SKEW_YZ                "PanaceaGyroSkewYZ"
+#define PANACEA_GYRO_SKEW_ZY                "PanaceaGyroSkewZY"
+#define PANACEA_GYRO_SKEW_XZ                "PanaceaGyroSkewXZ"
+#define PANACEA_GYRO_SKEW_ZX                "PanaceaGyroSkewZX"
+#define PANACEA_GYRO_SKEW_YX                "PanaceaGyroSkewYX"
+#define PANACEA_GYRO_SKEW_XY                "PanaceaGyroSkewXY"
+#define PANACEA_GYRO_SCALE_X                "PanaceaGyroScaleX"
+#define PANACEA_GYRO_SCALE_Y                "PanaceaGyroScaleY"
+#define PANACEA_GYRO_SCALE_Z                "PanaceaGyroScaleZ"
+
 //  Compass calibration and adjustment settings keys
 
 #define RTIMULIB_COMPASSCAL_VALID           "CompassCalValid"
@@ -253,6 +273,14 @@ public:
 
     bool m_gyroBiasValid;                                   // true if the recorded gyro bias is valid
     RTVector3 m_gyroBias;                                   // the recorded gyro bias
+
+    // Panacea additional calibration local variables
+    RTVector3 m_p_accelBias;
+    RTVector3 m_p_accelSkew;
+    RTVector3 m_p_accelScale;
+    RTVector3 m_p_gyroSkewS; // xy,yz,zx
+    RTVector3 m_p_gyroSkewA; // zy,yx,xz
+    RTVector3 m_p_gyroScale; 
 
     //  IMU-specific vars
 

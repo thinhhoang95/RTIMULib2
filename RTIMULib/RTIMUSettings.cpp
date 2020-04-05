@@ -751,10 +751,82 @@ bool RTIMUSettings::loadSettings()
         } else if (strcmp(key, RTIMULIB_GYRO_BIAS_Z) == 0) {
             sscanf(val, "%f", &ftemp);
             m_gyroBias.setZ(ftemp);
-
-        //  MPU9150 settings
-
-        } else if (strcmp(key, RTIMULIB_MPU9150_GYROACCEL_SAMPLERATE) == 0) {
+        } 
+        // PANACEA Calibration Settings
+        else if (strcmp(key, PANACEA_ACCEL_SKEW_YZ) == 0) {
+            sscanf(val, "%f", &ftemp);
+            m_p_accelSkew.setX(ftemp);
+        }
+        else if (strcmp(key, PANACEA_ACCEL_SKEW_ZY) == 0) {
+            sscanf(val, "%f", &ftemp);
+            m_p_accelSkew.setY(ftemp);
+        }
+        else if (strcmp(key, PANACEA_ACCEL_SKEW_ZX) == 0) {
+            sscanf(val, "%f", &ftemp);
+            m_p_accelSkew.setZ(ftemp);
+        }
+        else if (strcmp(key, PANACEA_ACCEL_BIAS_X) == 0) {
+            sscanf(val, "%f", &ftemp);
+            m_p_accelBias.setX(ftemp);
+        }
+        else if (strcmp(key, PANACEA_ACCEL_BIAS_Y) == 0) {
+            sscanf(val, "%f", &ftemp);
+            m_p_accelBias.setY(ftemp);
+        }
+        else if (strcmp(key, PANACEA_ACCEL_BIAS_Z) == 0) {
+            sscanf(val, "%f", &ftemp);
+            m_p_accelBias.setZ(ftemp);
+        }
+        else if (strcmp(key, PANACEA_ACCEL_SCALE_X) == 0) {
+            sscanf(val, "%f", &ftemp);
+            m_p_accelScale.setX(ftemp);
+        }
+        else if (strcmp(key, PANACEA_ACCEL_SCALE_Y) == 0) {
+            sscanf(val, "%f", &ftemp);
+            m_p_accelScale.setY(ftemp);
+        }
+        else if (strcmp(key, PANACEA_ACCEL_SCALE_Z) == 0) {
+            sscanf(val, "%f", &ftemp);
+            m_p_accelScale.setZ(ftemp);
+        }
+        else if (strcmp(key, PANACEA_GYRO_SKEW_XY) == 0) {
+            sscanf(val, "%f", &ftemp);
+            m_p_gyroSkewS.setX(ftemp);
+        }
+        else if (strcmp(key, PANACEA_GYRO_SKEW_YZ) == 0) {
+            sscanf(val, "%f", &ftemp);
+            m_p_gyroSkewS.setY(ftemp);
+        }
+        else if (strcmp(key, PANACEA_GYRO_SKEW_ZX) == 0) {
+            sscanf(val, "%f", &ftemp);
+            m_p_gyroSkewS.setZ(ftemp);
+        }
+        else if (strcmp(key, PANACEA_GYRO_SKEW_YX) == 0) {
+            sscanf(val, "%f", &ftemp);
+            m_p_gyroSkewA.setX(ftemp);
+        }
+        else if (strcmp(key, PANACEA_GYRO_SKEW_ZY) == 0) {
+            sscanf(val, "%f", &ftemp);
+            m_p_gyroSkewA.setY(ftemp);
+        }
+        else if (strcmp(key, PANACEA_GYRO_SKEW_XZ) == 0) {
+            sscanf(val, "%f", &ftemp);
+            m_p_gyroSkewA.setZ(ftemp);
+        }
+        else if (strcmp(key, PANACEA_GYRO_SCALE_X) == 0) {
+            sscanf(val, "%f", &ftemp);
+            m_p_gyroScale.setX(ftemp);
+        }
+        else if (strcmp(key, PANACEA_GYRO_SCALE_Y) == 0) {
+            sscanf(val, "%f", &ftemp);
+            m_p_gyroScale.setY(ftemp);
+        }
+        else if (strcmp(key, PANACEA_GYRO_SCALE_Z) == 0) {
+            sscanf(val, "%f", &ftemp);
+            m_p_gyroScale.setZ(ftemp);
+        }
+        //  MPU9150 settings 
+        else if (strcmp(key, RTIMULIB_MPU9150_GYROACCEL_SAMPLERATE) == 0) {
             m_MPU9150GyroAccelSampleRate = atoi(val);
         } else if (strcmp(key, RTIMULIB_MPU9150_COMPASS_SAMPLERATE) == 0) {
             m_MPU9150CompassSampleRate = atoi(val);

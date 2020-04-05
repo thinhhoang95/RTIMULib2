@@ -628,3 +628,54 @@ RTFLOAT RTMatrix4x4::matMinor(const int row, const int col)
     return res;
 }
 
+// ----------------------------
+// Thinh Matrix 3x3
+// ----------------------------
+
+ThinhMatrix3::ThinhMatrix3()
+{
+    fill(0);
+}
+
+ThinhMatrix3& ThinhMatrix3::operator =(const ThinhMatrix3& mat)
+{
+    if (this == &mat)
+        return *this;
+
+    for (int row = 0; row < 3; row++)
+        for (int col = 0; col < 3; col++)
+            m_data[row][col] = mat.m_data[row][col];
+
+    return *this;
+}
+
+
+void ThinhMatrix3::fill(RTFLOAT val)
+{
+    for (int row = 0; row < 3; row++)
+        for (int col = 0; col < 3; col++)
+            m_data[row][col] = val;
+}
+
+const RTVector3 ThinhMatrix3::operator *(const RTVector3& x) const
+{
+    RTVector3 res;
+    RTFLOAT res_x = (RTFLOAT) 0.0, res_y = (RTFLOAT) 0.0, res_z = (RTFLOAT) 0.0;
+
+    res_x = m_data[0][0] * x.x() + m_data[0][1] * x.y() + m_data[0][2] * x.z();
+    res_y = m_data[1][0] * x.x() + m_data[1][1] * x.y() + m_data[1][2] * x.z();
+    res_z = m_data[2][0] * x.x() + m_data[2][1] * x.y() + m_data[2][2] * x.z();
+    
+    res.setX(res_x);
+    res.setY(res_y);
+    res.setZ(res_z);
+    return res;
+}
+
+void ThinhMatrix3::setToIdentity()
+{
+    fill(0);
+    m_data[0][0] = 1;
+    m_data[1][1] = 1;
+    m_data[2][2] = 1;
+}

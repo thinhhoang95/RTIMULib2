@@ -430,7 +430,7 @@ void RTIMU::calibrateAverageCompass()
     m_imuData.compass = m_compassAverage;
 }
 
-void RTIMU::calibrateAccel()
+/* void RTIMU::calibrateAccel()
 {
     if (!getAccelCalibrationValid())
         return;
@@ -449,6 +449,66 @@ void RTIMU::calibrateAccel()
         m_imuData.accel.setZ(m_imuData.accel.z() / m_settings->m_accelCalMax.z());
     else
         m_imuData.accel.setZ(m_imuData.accel.z() / -m_settings->m_accelCalMin.z());
+} */
+
+// We might preprocess the additionally calibrated bias and conversion from non-orthogonal to orthogonal frame
+// in calibrateAccel and handleGyroBias
+
+void RTIMU::calibrateAccel()
+{
+    if (!getAccelCalibrationValid())
+        return; // if not calibrated then stop
+
+    RTFLOAT localGravity = (RTFLOAT) 9.78204;
+    
+    if (m_imuData.accel.x() >= 0)
+        m_imuData.accel.setX(m_imuData.accel.x() / m_settings->m_accelCalMax.x());
+    else
+        m_imuData.accel.setX(m_imuData.accel.x() / -m_settings->m_accelCalMin.x());
+
+    if (m_imuData.accel.y() >= 0)
+        m_imuData.accel.setY(m_imuData.accel.y() / m_settings->m_accelCalMax.y());
+    else
+        m_imuData.accel.setY(m_imuData.accel.y() / -m_settings->m_accelCalMin.y());
+
+    if (m_imuData.accel.z() >= 0)
+        m_imuData.accel.setZ(m_imuData.accel.z() / m_settings->m_accelCalMax.z());
+    else
+        m_imuData.accel.setZ(m_imuData.accel.z() / -m_settings->m_accelCalMin.z());
+
+    RTFLOAT accX = m_imuData.accel.x();
+    RTFLOAT accY = m_imuData.accel.y();
+    RTFLOAT accZ = m_imuData.accel.z();
+
+    // Scaling of the acceleration measurements
+    accX = accX * m_settings->m_p_accelScale.x();
+    accY = accY * m_settings->m_p_accelScale.y();
+    accZ = accZ * m_settings->m_p_accelScale.z();
+
+    // Adding bias to the measurement, bias is in m/s^2 while acc(.) is in g
+
+    accX += m_settings->m_p_accelBias.x()/localGravity;
+    accY += m_settings->m_p_accelBias.y()/localGravity;
+    accZ += m_settings->m_p_accelBias.z()/localGravity;
+
+    // Deskew of the non-orthogonal frame by multiplying with a 3x3 matrix
+    ThinhMatrix3 T_matrix;
+    T_matrix.setToIdentity();
+    T_matrix.setVal(0,1) = -m_settings->m_p_accelSkew.x();
+    T_matrix.setVal(0,2) = m_settings->m_p_accelSkew.y();
+    T_matrix.setVal(1,2) = -m_settings->m_p_accelSkew.z();
+
+    RTVector3 skewedAccel;
+    skewedAccel.setX(accX);
+    skewedAccel.setY(accY);
+    skewedAccel.setZ(accZ);
+
+    skewedAccel = T_matrix * skewedAccel;
+
+    // Set the IMU data output
+    m_imuData.accel.setX(skewedAccel.x());
+    m_imuData.accel.setY(skewedAccel.y());
+    m_imuData.accel.setZ(skewedAccel.z());
 }
 
 void RTIMU::updateFusion()

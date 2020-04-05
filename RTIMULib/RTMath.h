@@ -192,4 +192,25 @@ private:
     RTFLOAT matMinor(const int row, const int col);
 };
 
+class ThinhMatrix3
+{
+public:
+    ThinhMatrix3();
+
+    ThinhMatrix3& operator =(const ThinhMatrix3& vec);
+    const RTVector3 operator *(const RTVector3& x) const;
+    // const RTQuaternion operator *(const RTQuaternion& q) const;
+    // const RTMatrix4x4 operator *(const RTFLOAT val) const;
+    // const RTMatrix4x4 operator *(const RTMatrix4x4& mat) const;
+    // const RTMatrix4x4 operator +(const RTMatrix4x4& mat) const;
+
+    inline RTFLOAT val(int row, int col) const { return m_data[row][col]; }
+    inline void setVal(int row, int col, RTFLOAT val) { m_data[row][col] = val; }
+    void fill(RTFLOAT val);
+    void setToIdentity();
+
+private:
+    RTFLOAT m_data[3][3];                                   // row, column
+};
+
 #endif /* _RTMATH_H_ */
