@@ -1165,15 +1165,15 @@ bool RTIMUSettings::saveSettings()
 
     setBlank();
     setComment("Saved Panacea Accelerometer Recalibration Settings");
-    setValue(PANACEA_ACCEL_SKEW_YZ, m_p_accelSkew.x())
-    setValue(PANACEA_ACCEL_SKEW_ZY, m_p_accelSkew.y())
-    setValue(PANACEA_ACCEL_SKEW_ZX, m_p_accelSkew.z())
-    setValue(PANACEA_ACCEL_SCALE_X, m_p_accelScale.x())
-    setValue(PANACEA_ACCEL_SCALE_Y, m_p_accelScale.y())
-    setValue(PANACEA_ACCEL_SCALE_Z, m_p_accelScale.z())
-    setValue(PANACEA_ACCEL_BIAS_X, m_p_accelBias.x())
-    setValue(PANACEA_ACCEL_BIAS_Y, m_p_accelBias.y())
-    setValue(PANACEA_ACCEL_BIAS_Z, m_p_accelBias.z())
+    setValue(PANACEA_ACCEL_SKEW_YZ, m_p_accelSkew.x());
+    setValue(PANACEA_ACCEL_SKEW_ZY, m_p_accelSkew.y());
+    setValue(PANACEA_ACCEL_SKEW_ZX, m_p_accelSkew.z());
+    setValue(PANACEA_ACCEL_SCALE_X, m_p_accelScale.x());
+    setValue(PANACEA_ACCEL_SCALE_Y, m_p_accelScale.y());
+    setValue(PANACEA_ACCEL_SCALE_Z, m_p_accelScale.z());
+    setValue(PANACEA_ACCEL_BIAS_X, m_p_accelBias.x());
+    setValue(PANACEA_ACCEL_BIAS_Y, m_p_accelBias.y());
+    setValue(PANACEA_ACCEL_BIAS_Z, m_p_accelBias.z());
     //  MPU-9150 settings
 
     setBlank();
