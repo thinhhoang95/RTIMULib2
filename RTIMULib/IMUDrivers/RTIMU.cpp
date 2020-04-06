@@ -480,16 +480,17 @@ void RTIMU::calibrateAccel()
     RTFLOAT accY = m_imuData.accel.y();
     RTFLOAT accZ = m_imuData.accel.z();
 
-    // Scaling of the acceleration measurements
-    accX = accX * m_settings->m_p_accelScale.x();
-    accY = accY * m_settings->m_p_accelScale.y();
-    accZ = accZ * m_settings->m_p_accelScale.z();
-
     // Adding bias to the measurement, bias is in m/s^2 while acc(.) is in g
 
     accX += m_settings->m_p_accelBias.x()/localGravity;
     accY += m_settings->m_p_accelBias.y()/localGravity;
     accZ += m_settings->m_p_accelBias.z()/localGravity;
+
+    
+    // Scaling of the acceleration measurements
+    accX = accX * m_settings->m_p_accelScale.x();
+    accY = accY * m_settings->m_p_accelScale.y();
+    accZ = accZ * m_settings->m_p_accelScale.z();
 
     // Deskew of the non-orthogonal frame by multiplying with a 3x3 matrix
     ThinhMatrix3 T_matrix;
