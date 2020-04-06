@@ -494,9 +494,9 @@ void RTIMU::calibrateAccel()
     // Deskew of the non-orthogonal frame by multiplying with a 3x3 matrix
     ThinhMatrix3 T_matrix;
     T_matrix.setToIdentity();
-    T_matrix.setVal(0,1) = -m_settings->m_p_accelSkew.x();
-    T_matrix.setVal(0,2) = m_settings->m_p_accelSkew.y();
-    T_matrix.setVal(1,2) = -m_settings->m_p_accelSkew.z();
+    T_matrix.setVal(0,1,-m_settings->m_p_accelSkew.x());
+    T_matrix.setVal(0,2,m_settings->m_p_accelSkew.y());
+    T_matrix.setVal(1,2,-m_settings->m_p_accelSkew.z());
 
     RTVector3 skewedAccel;
     skewedAccel.setX(accX);
