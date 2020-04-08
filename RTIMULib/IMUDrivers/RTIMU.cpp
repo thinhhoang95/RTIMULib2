@@ -506,9 +506,9 @@ void RTIMU::calibrateAccel()
 
     // Adding bias to the measurement, bias is in m/s^2 while acc(.) is in g
 
-    accX += m_settings->m_p_accelBias.x()/localGravity;
-    accY += m_settings->m_p_accelBias.y()/localGravity;
-    accZ += m_settings->m_p_accelBias.z()/localGravity;
+    accX -= m_settings->m_p_accelBias.x()/localGravity;
+    accY -= m_settings->m_p_accelBias.y()/localGravity;
+    accZ -= m_settings->m_p_accelBias.z()/localGravity;
 
     skewedAccel.setX(accX);
     skewedAccel.setY(accY);
