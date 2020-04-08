@@ -788,7 +788,7 @@ bool RTIMUSettings::loadSettings()
         else if (strcmp(key, PANACEA_ACCEL_SCALE_Z) == 0) {
             sscanf(val, "%f", &ftemp);
             m_p_accelScale.setZ(ftemp);
-        }
+        }/*
         else if (strcmp(key, PANACEA_GYRO_SKEW_XY) == 0) {
             sscanf(val, "%f", &ftemp);
             m_p_gyroSkewS.setX(ftemp);
@@ -824,7 +824,7 @@ bool RTIMUSettings::loadSettings()
         else if (strcmp(key, PANACEA_GYRO_SCALE_Z) == 0) {
             sscanf(val, "%f", &ftemp);
             m_p_gyroScale.setZ(ftemp);
-        }
+        }*/
         //  MPU9150 settings 
         else if (strcmp(key, RTIMULIB_MPU9150_GYROACCEL_SAMPLERATE) == 0) {
             m_MPU9150GyroAccelSampleRate = atoi(val);
@@ -1806,7 +1806,7 @@ void RTIMUSettings::setValue(const char *key, const int val)
 
 void RTIMUSettings::setValue(const char *key, const RTFLOAT val)
 {
-    fprintf(m_fd, "%s=%f\n", key, val);
+    fprintf(m_fd, "%s=%.12f\n", key, val);
 }
 
 

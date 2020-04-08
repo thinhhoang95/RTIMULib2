@@ -314,6 +314,7 @@ void RTIMU::handleGyroBias()
     }
 
     m_imuData.gyro -= m_settings->m_gyroBias;
+    
 }
 
 void RTIMU::calibrateAverageCompass()
@@ -479,13 +480,6 @@ void RTIMU::calibrateAccel()
     RTFLOAT accX = m_imuData.accel.x();
     RTFLOAT accY = m_imuData.accel.y();
     RTFLOAT accZ = m_imuData.accel.z();
-
-    // Adding bias to the measurement, bias is in m/s^2 while acc(.) is in g
-
-    accX += m_settings->m_p_accelBias.x()/localGravity;
-    accY += m_settings->m_p_accelBias.y()/localGravity;
-    accZ += m_settings->m_p_accelBias.z()/localGravity;
-
     
     // Scaling of the acceleration measurements
     accX = accX * m_settings->m_p_accelScale.x();
@@ -505,6 +499,20 @@ void RTIMU::calibrateAccel()
     skewedAccel.setZ(accZ);
 
     skewedAccel = T_matrix * skewedAccel;
+
+    accX = skewedAccel.x();
+    accY = skewedAccel.y();
+    accZ = skewedAccel.z();
+
+    // Adding bias to the measurement, bias is in m/s^2 while acc(.) is in g
+
+    accX += m_settings->m_p_accelBias.x()/localGravity;
+    accY += m_settings->m_p_accelBias.y()/localGravity;
+    accZ += m_settings->m_p_accelBias.z()/localGravity;
+
+    skewedAccel.setX(accX);
+    skewedAccel.setY(accY);
+    skewedAccel.setZ(accZ);
 
     // Set the IMU data output
     m_imuData.accel.setX(skewedAccel.x());
